@@ -37,6 +37,7 @@ class Login extends React.Component {
                 <form className="login-form" onSubmit={this.login}>
                     <input type="text" name="username" value={this.state.credentials.username}  onChange={this.handleChange} required />
                     <input type="password" name="password" value={this.state.credentials.password} onChange={this.handleChange} required />
+                    {this.props.error !== null ? <p>Wrong username or pasword. Please try again</p> : null}
                     <button>Login</button>
                 </form>
             </div>
@@ -45,10 +46,12 @@ class Login extends React.Component {
 }
 
 
-const mapStateToProps = state => ({
-    isLoggingIn: state.isLoggingIn
+const mapStateToProps = ({isLoggingIn, error}) => ({
+    isLoggingIn,
+    error
+
   });
-  export default connect(null,{login})(Login)
+  export default connect(mapStateToProps,{login})(Login)
 //   export default connect(
 //     mapStateToProps,
 //     { login }

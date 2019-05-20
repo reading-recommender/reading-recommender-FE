@@ -7,6 +7,11 @@ class Books extends React.Component {
     componentDidMount() {
         this.props.getData()
     }
+
+    logOut = () => {
+        localStorage.clear();
+        window.location.reload();
+    }
     render() {
         return (
             
@@ -19,6 +24,7 @@ class Books extends React.Component {
                     <p>{item.location}</p> 
                 </div>
                ) }  
+               <button onClick={this.logOut}>Log Out</button>
             </div>
         );
     }

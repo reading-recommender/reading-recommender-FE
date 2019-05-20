@@ -15,7 +15,7 @@ export const login = creds => dispatch => {
         })
         .catch(err => {
             console.log(err)
-            dispatch({ type: LOGIN_FAIL, payload: err.data.message})
+            dispatch({ type: LOGIN_FAIL, payload: ''})
         })
 
 }
