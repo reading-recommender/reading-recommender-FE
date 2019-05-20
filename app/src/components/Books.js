@@ -1,13 +1,27 @@
 import React from 'react';
-
+import {connect} from 'react-redux'
+import { getData } from '../actions';
 class Books extends React.Component {
     state = {}
 
+    componentDidMount() {
+        this.props.getData()
+    }
     render() {
         return (
-            <h1>This is the book page</h1>
+            <div>
+               {this.props.data.map((item, index) => 
+                <div key={index}>
+                    <p>{item.location}</p>
+                </div>
+                )}
+            </div>
         );
     }
 }
 
-export default Books;
+const mapStateToProps = state => ({
+    isLoading: state.props,
+    data: state.data
+})
+export default connect(mapStateToProps, {getData})(Books);

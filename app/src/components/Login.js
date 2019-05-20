@@ -16,7 +16,7 @@ class Login extends React.Component {
         this.setState({
             credentials: {
                  ...this.state.credentials,
-                 [e.target.name] : [e.target.value]
+                 [e.target.name] : e.target.value
 
             }
         })
@@ -24,6 +24,7 @@ class Login extends React.Component {
 
     login = e => {
         e.preventDefault();
+        console.log(this.state.credentials)
         this.props.login(this.state.credentials).then(() => {
             this.props.history.push('/books')
         });
