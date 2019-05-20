@@ -2,6 +2,42 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {login} from '../actions';
 
+import styled, {css} from 'styled-components'
+
+const Button = styled.button`
+  
+  background-color: #565656;
+  border: none;
+  border-radius: 15px;
+  color: #fff
+  padding: 1rem 2rem;
+  margin: 1rem 0px;
+  cursor: pointer;
+  ${props =>
+    props.secondary &&
+    css`
+      background-color: #76323F;
+      color: white;
+    `};
+  
+`
+
+const Form = styled.div`
+   display: flex;
+   flex-direction: column;
+   width: 700px;
+   justify-content: center;
+   padding: 5rem;
+   background-color: #D7CEC7;
+   margin: 0 auto;
+   & input {
+    height: 2rem;
+    background-color: #fff;
+    margin: 1rem 0px;
+  }
+ 
+    `
+  
 class Login extends React.Component {
     state = {
             credentials: {
@@ -34,13 +70,13 @@ class Login extends React.Component {
         return (
             <div className="login"> 
                 <h1>Please Login</h1>
-                <form className="login-form" onSubmit={this.login}>
+                <Form className="login-form" onSubmit={this.login}>
                     <input type="text" name="username" value={this.state.credentials.username}  onChange={this.handleChange} required />
                     <input type="password" name="password" value={this.state.credentials.password} onChange={this.handleChange} required />
                     {this.props.error !== null ? <p>Wrong username or pasword. Please try again</p> : null}
-                    <button>Login</button>
-                    <button onClick={()=> this.props.history.push('/signup')}>Sign Up</button>
-                </form>
+                    <Button >Login</Button>
+                    <Button secondary onClick={()=> this.props.history.push('/signup')}>Sign Up</Button>
+                </Form>
             </div>
         );
     }
