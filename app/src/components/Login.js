@@ -39,6 +39,7 @@ class Login extends React.Component {
                     <input type="password" name="password" value={this.state.credentials.password} onChange={this.handleChange} required />
                     {this.props.error !== null ? <p>Wrong username or pasword. Please try again</p> : null}
                     <button>Login</button>
+                    <button onClick={()=> this.props.history.push('/signup')}>Sign Up</button>
                 </form>
             </div>
         );
