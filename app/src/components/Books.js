@@ -9,19 +9,23 @@ class Books extends React.Component {
     }
     render() {
         return (
+            
             <div>
-               {this.props.data.map((item, index) => 
+                {this.props.isLoading === true ? <h1>...Loading</h1> : null}
+               {!this.props.isLoading   && this.props.data.map((item, index) => 
+                   
                 <div key={index}>
-                    <p>{item.location}</p>
+                    
+                    <p>{item.location}</p> 
                 </div>
-                )}
+               ) }  
             </div>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    isLoading: state.props,
-    data: state.data
+const mapStateToProps = ({isLoading, data})=> ({
+    isLoading,
+    data
 })
 export default connect(mapStateToProps, {getData})(Books);

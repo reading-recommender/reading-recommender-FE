@@ -9,7 +9,7 @@ import Books from './components/Books';
 function App() {
   return (
     <div className="App">
-      <Route exact path="/" component={Login} />
+      <Route exact path="/login" component={Login} />
       <PrivateRoute exact path="/books" component={Books} />
     </div>
   );
