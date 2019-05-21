@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {login} from '../actions';
 import bookshelf from '../bookshelf.jpg'
-import styled, {css} from 'styled-components'
+import styled, {css, createGlobalStyle} from 'styled-components'
+
 
 
 const LoginContainer = styled.div`
@@ -14,10 +15,12 @@ const LoginContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  background-position: center;
 
   & h1 {
     color: #fff;
     text-shadow: 2px 2px 2px #000;  
+    font-family: 'Bitter', serif;
     }
   
 `
@@ -30,11 +33,23 @@ const Button = styled.button`
   padding: 1rem 2rem;
   margin: 1rem 0px;
   cursor: pointer;
+  font-family: 'Bitter', serif;
+  font-size: 1rem;
   ${props =>
     props.secondary &&
     css`
       background-color: #76323F;
       color: white;
+    `};
+
+${props =>
+    props.guest &&
+    css`
+        background-color: #C09F80;
+        color: white;
+        width: 250px;
+        margin: 0 auto;
+        margin-top: 1rem;
     `};
   
 `
@@ -51,6 +66,8 @@ const Form = styled.form`
     height: 2rem;
     background-color: #fff;
     margin: 1rem 0px;
+    font-family: 'Raleway', serif;
+    font-size: 1rem;
   }
   & p {
       color: red;
@@ -132,6 +149,7 @@ class Login extends React.Component {
                     {this.props.error !== null ? <p>Wrong username or pasword. Please try again</p> : null}
                     <Button >Login</Button>
                     <Button secondary onClick={()=> this.setState({loginForm:false,signupForm:true})}>Sign Up</Button>
+                    <Button guest>Continue as Guest</Button>
                 </Form> }
                 {this.state.signupForm && 
                 <Form onSubmit={this.submitUser} autoComplete="false">
@@ -139,6 +157,7 @@ class Login extends React.Component {
                     <input name="password" type="password" onChange={this.handleChange} value={this.state.password} requried />
                     <Button>Sign Up</Button>
                     <Button secondary onClick={()=> this.setState({loginForm:true,signupForm:false})}>Cancel</Button>
+                    <Button guest>Continue as Guest</Button>
                  </Form>
                 }
             </LoginContainer>
