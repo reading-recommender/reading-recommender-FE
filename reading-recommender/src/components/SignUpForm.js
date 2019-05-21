@@ -1,6 +1,23 @@
 import React from 'react'
 import styled, {css} from 'styled-components';
+import bookshelf from '../bookshelf.jpg'
 
+const LoginContainer = styled.div`
+  
+  background-image: url(${bookshelf});
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  & h1 {
+    color: #fff;
+    text-shadow: 2px 2px 2px #000;  
+    }
+  
+`
 const Button = styled.button`
   
   background-color: #565656;
@@ -58,7 +75,7 @@ class SignUpForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <LoginContainer>
             <h1>Sign Up</h1>
             <Form onSubmit={this.submitUser} autoComplete="false">
                 <input name="username" type="text" value={this.state.username} required/>
@@ -66,7 +83,7 @@ class SignUpForm extends React.Component {
                 <Button>Sign Up</Button>
                 <Button secondary onClick={()=> this.props.history.push('/')}>Cancel</Button>
             </Form>
-            </div>
+            </LoginContainer>
         );
     }
 }
