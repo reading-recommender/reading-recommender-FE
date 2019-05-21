@@ -22,7 +22,7 @@ const Button = styled.button`
   
 `
 
-const Form = styled.div`
+const Form = styled.form`
    display: flex;
    flex-direction: column;
    width: 700px;
@@ -34,6 +34,9 @@ const Form = styled.div`
     height: 2rem;
     background-color: #fff;
     margin: 1rem 0px;
+  }
+  & p {
+      color: red;
   }
  
     `

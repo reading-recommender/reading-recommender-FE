@@ -58,12 +58,15 @@ class SignUpForm extends React.Component {
 
     render() {
         return (
+            <div>
+            <h1>Sign Up</h1>
             <Form onSubmit={this.submitUser} autoComplete="false">
                 <input name="username" type="text" value={this.state.username} required/>
                 <input name="password" type="password" value={this.state.password} requried />
                 <Button>Sign Up</Button>
                 <Button secondary onClick={()=> this.props.history.push('/login')}>Cancel</Button>
             </Form>
+            </div>
         );
     }
 }
