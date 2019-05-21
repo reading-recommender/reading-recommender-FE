@@ -25,6 +25,16 @@ const LoginContainer = styled.div`
   
 `
 const Button = styled.button`
+@keyframes pulse {
+    0%   {transform: scale(1);}
+    25%  {transform: scale(1.02);}
+    50% {transform: scale(1.05);}
+    75% {transform: scale(1.07);}
+    100% {transform: scale(1.1);}
+    
+    
+  }
+  
   
   background-color: #565656;
   border: none;
@@ -51,6 +61,11 @@ ${props =>
         margin: 0 auto;
         margin-top: 1rem;
     `};
+
+    &:hover {
+        animation-name: pulse;
+        animation-duration: .07s;
+    }
   
 `
 
@@ -62,6 +77,9 @@ const Form = styled.form`
    padding: 5rem;
    background-color: #D7CEC7;
    margin: 0 auto;
+   border-radius: 30px;
+   box-shadow: -5px 5px 5px #000;
+   
    & input {
     height: 2rem;
     background-color: #fff;
