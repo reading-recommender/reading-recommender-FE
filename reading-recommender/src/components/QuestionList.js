@@ -5,8 +5,11 @@ import Questions from "./Questions";
 const QuestionList = props => {
   return (
     <ul>
-      {props.questions.map(quizQuestions => {
-        return <Questions key={quizQuestions.question} question={quizQuestions} />;
+      {props.quizQuestions.map(question => {
+        return <Questions 
+          key={question.id} 
+          question={question}
+          />;
         
       })}
     </ul>

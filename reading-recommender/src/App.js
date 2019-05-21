@@ -1,66 +1,67 @@
-// import React from 'react';
-// import './App.css';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <h1>Hello</h1>
-//     </div>
-//   );
-// }
+import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+import Login from "./components/Login";
+import QuizQuestionsView from "./views/QuizQuestionsView";
+import Questions from "./components/Questions";
+import styled, {css} from 'styled-components'
 
-// export default App;
+const NavigationStyle = styled.div`
+  
+  background-color: #222;
+  border: 1px solid black;
+  color: #fff
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  ${props =>
+    props.secondary &&
+    css`
+      background-color: #76323F;
+      color: white;
+      text-decoration: none;
+    `};
+`
+const AppStyle = styled.div`
+  
+  background-color: #eee;
+  height: 100%;
+`
+const LinkStyle = styled(Link)`
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+`
+const NavLinkStyle = styled(Link)`
+  text-decoration: none;
+`
 
-
-import React, { Component } from 'react';
-import './App.css';
-import { connect } from "react-redux";
-import { fetchQuestions } from "./actions"
-import QuestionList from "./components/QuestionList";
-/*
- to wire this component up you're going to need a few things.
- I'll let you do this part on your own. 
- Just remember, `how do I `connect` my components to redux?`
- `How do I ensure that my component links the state to props?`
- */
-class App extends Component {
-  constructor() {
-    super();
-  }
-
-  componentDidMount() {
-    // call our action
-    console.log("App did mount props", this.props)
-    this.props.fetchQuestions();
-  }
-
-  render() {
-    if (this.props.fetching) {
-      // return something here to indicate that you are fetching data
-      console.log("Fetching data render", this.props)
-    }
-    
-    return (
-      <div className="FriendsList_wrapper">
-        <QuestionList questions={this.props.questions} />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <Router>
+      <AppStyle className="App">
+        <NavigationStyle>
+          <NavLinkStyle>
+            <LinkStyle to="/login">Login</LinkStyle>
+          </NavLinkStyle>
+          <NavLinkStyle>
+            <LinkStyle to="/questions">Continue as Guest</LinkStyle>
+          </NavLinkStyle>
+          <NavLinkStyle>
+            {/* <Link to="/protected">Protected Page</Link> */}
+          </NavLinkStyle>
+        </NavigationStyle>
+        <Route path="/login" component={Login} />
+        <Route path="/questions" component={QuizQuestionsView} />
+        <PrivateRoute exact path="/protected" component={QuizQuestionsView} />
+      </AppStyle>
+    </Router>
+  );
 }
 
-// export default App;
-const mapStateToProps = state => {
-  console.log('mapStateToProps', state)
-  return {
-    questions: state.questions,
-    fetching: state.fetchingQuestions,
-    error: state.error,
-  }
-}
-
-export default connect(
-  mapStateToProps /* mapStateToProps replaces null here */,
-  {
-    fetchQuestions,/* action creators go here */
-  }
-)(App);
+export default App;
