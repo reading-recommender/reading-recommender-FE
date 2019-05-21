@@ -10,8 +10,8 @@ export const login = creds => dispatch => {
         .post('https://reading-recommender.herokuapp.com/api/login', creds)
         .then(res => {
             console.log(res)
-            //localStorage.setItem("token", res.data.payload);
-            //dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload})
+            localStorage.setItem("token", res.data.payload);
+            dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload})
         })
         .catch(err => {
             console.log(err)
