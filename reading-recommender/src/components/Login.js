@@ -79,14 +79,14 @@ ${props =>
 const Form = styled.form`
    display: flex;
    flex-direction: column;
-   width: 30%;
+   width: 50%;
    justify-content: center;
    padding: 5rem;
    background-color: #D7CEC7;
    margin: 0 auto;
    border-radius: 30px;
    box-shadow: -5px 5px 5px #000;
-   max-width: 500px;
+   max-width: 700px;
    
    & input {
     // height: 2rem;
