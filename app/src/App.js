@@ -9,7 +9,7 @@ import SignUpForm from './components/SignUpForm'
 function App() {
   return (
     <div className="App">
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/" component={Login} />
       <Route path='/signup' render={ (props) => <SignUpForm {...props} />} />
       <PrivateRoute exact path="/books" component={Books} />
     </div>
