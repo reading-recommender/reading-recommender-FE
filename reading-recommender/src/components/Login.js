@@ -16,7 +16,7 @@ const LoginContainer = styled.div`
   justify-content: center;
   flex-direction: column;
   background-position: center;
-
+  padding: 20px;
   & h1 {
     color: #fff;
     text-shadow: 2px 2px 2px #000;  
@@ -41,10 +41,14 @@ const Button = styled.button`
   border-radius: 15px;
   color: #fff
   padding: 1rem 2rem;
-  margin: 1rem 0px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   cursor: pointer;
   font-family: 'Bitter', serif;
   font-size: 1rem;
+  width: 100%;
+  //max-width: 300px;
   ${props =>
     props.secondary &&
     css`
@@ -66,30 +70,72 @@ ${props =>
         animation-name: pulse;
         animation-duration: .07s;
     }
+
+    
+      }
   
 `
 
 const Form = styled.form`
    display: flex;
    flex-direction: column;
-   width: 700px;
+   width: 30%;
    justify-content: center;
    padding: 5rem;
    background-color: #D7CEC7;
    margin: 0 auto;
    border-radius: 30px;
    box-shadow: -5px 5px 5px #000;
+   max-width: 500px;
    
    & input {
-    height: 2rem;
-    background-color: #fff;
-    margin: 1rem 0px;
-    font-family: 'Raleway', serif;
-    font-size: 1rem;
+    // height: 2rem;
+    // background-color: #fff;
+    // margin: 1rem 0px;
+    // font-family: 'Raleway', serif;
+    // font-size: 1rem;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
   }
+
+  & .col-1 {
+    float: left;
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  @media screen and (max-width: 600px) {
+    .col-1, input, button {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+     button {
+      max-width: 175px;
+      font-size: .7rem;
+      margin-top: 5px;
+      margin-bottom: 5px
+    }
+  }
+
+  
   & p {
       color: red;
   }
+
+
   
  
     `
@@ -162,8 +208,16 @@ class Login extends React.Component {
                 <h1>{this.state.loginForm ? 'Login' : 'Sign Up'}</h1>
                 {this.state.loginForm && 
                 <Form className="login-form" onSubmit={this.login}>
-                    <input type="text" name="username" value={this.state.credentials.username}  onChange={this.handleChange} required />
-                    <input type="password" name="password" value={this.state.credentials.password} onChange={this.handleChange} required />
+                    <div className="row">
+                        <div className="col-1">
+                         <input type="text" name="username" value={this.state.credentials.username}  onChange={this.handleChange} required />
+                      </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-1">
+                            <input type="password" name="password" value={this.state.credentials.password} onChange={this.handleChange} required />
+                        </div>
+                    </div>
                     {this.props.error !== null ? <p>Wrong username or pasword. Please try again</p> : null}
                     <Button >Login</Button>
                     <Button secondary onClick={()=> this.setState({loginForm:false,signupForm:true})}>Sign Up</Button>
