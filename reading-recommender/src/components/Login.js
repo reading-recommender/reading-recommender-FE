@@ -117,7 +117,6 @@ const Form = styled.form`
   @media screen and (max-width: 600px) {
     .col-1, input, button {
       width: 100%;
-      margin-top: 0;
     }
   }
 
