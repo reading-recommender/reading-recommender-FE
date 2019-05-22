@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
       {...rest}
       render={(props) => {
         if (localStorage.getItem("token") || guest) {
-          return <Component />;
+          return <Component {...props}/>;
         } else {
           return <Redirect to="/" />;
         }
