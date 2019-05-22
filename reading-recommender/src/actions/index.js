@@ -26,7 +26,7 @@ export const FETCH_DATA_FAIL = "FETCH_DATA_FAIL"
 export const getData = () => dispatch => {
     dispatch({type: FETCH_DATA_START });
     axiosWithAuth()
-    .get('/server.js')
+    .get('https://reading-recommender.herokuapp.com/')
     .then(res => {
         console.log(res)
        dispatch({type: FETCH_DATA_SUCCESS, payload: res.data.data})
