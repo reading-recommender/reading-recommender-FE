@@ -102,7 +102,7 @@ const Form = styled.form`
     clear: both;
   }
   @media screen and (max-width: 600px) {
-    .col-1, input, button {
+    .col-1, input {
       width: 100%;
     }
   }
@@ -110,7 +110,7 @@ const Form = styled.form`
      button {
       font-size: .7rem;
       margin-top: 5px;
-      margin-bottom: 5px
+      margin-bottom: 5px;
     }
   }
 
