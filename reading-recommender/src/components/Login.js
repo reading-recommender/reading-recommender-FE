@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {login} from '../actions';
+import {login, guestActive} from '../actions';
 import bookshelf from '../bookshelf.jpg'
 import styled, {css, createGlobalStyle} from 'styled-components'
 
@@ -61,7 +61,7 @@ ${props =>
     css`
         background-color: #C09F80;
         color: white;
-        width: 250px;
+        width: 75%;
         margin: 0 auto;
         margin-top: 1rem;
     `};
@@ -123,7 +123,6 @@ const Form = styled.form`
 
   @media screen and (max-width: 900px) {
      button {
-      max-width: 175px;
       font-size: .7rem;
       margin-top: 5px;
       margin-bottom: 5px
@@ -201,6 +200,14 @@ class Login extends React.Component {
        console.log(this.state.user)
     }
 
+    handleGuest = (e) => {
+        e.preventDefault();
+        this.props.guestActive(this.state.guest)
+        console.log(this.state.guest)
+        this.props.history.push('/books')
+        
+    }
+
     render(){
         return (
             <LoginContainer> 
@@ -221,7 +228,7 @@ class Login extends React.Component {
                     {this.props.error !== null ? <p>Wrong username or pasword. Please try again</p> : null}
                     <Button >Login</Button>
                     <Button secondary onClick={()=> this.setState({loginForm:false,signupForm:true})}>Sign Up</Button>
-                    <Button guest>Continue as Guest</Button>
+                    <Button guest onClick={this.handleGuest}>Continue as Guest</Button>
                 </Form> }
                 {this.state.signupForm && 
                 <Form onSubmit={this.submitUser} autoComplete="false">
@@ -229,7 +236,7 @@ class Login extends React.Component {
                     <input name="password" type="password" onChange={this.handleChange} value={this.state.password} requried />
                     <Button>Sign Up</Button>
                     <Button secondary onClick={()=> this.setState({loginForm:true,signupForm:false})}>Cancel</Button>
-                    <Button guest>Continue as Guest</Button>
+                    
                  </Form>
                 }
             </LoginContainer>
@@ -243,7 +250,7 @@ const mapStateToProps = ({isLoggingIn, error}) => ({
     error
 
   });
-  export default connect(mapStateToProps,{login})(Login)
+  export default connect(mapStateToProps,{login, guestActive})(Login)
 //   export default connect(
 //     mapStateToProps,
 //     { login }

@@ -5,13 +5,16 @@ import {
     LOGIN_FAIL,
     FETCH_DATA_START,
     FETCH_DATA_SUCCESS,
-    FETCH_DATA_FAIL
+    FETCH_DATA_FAIL,
+    GUEST_ACTIVE,
+    GUEST_INACTIVE
 } from '../actions';
 const initialState = {
     data: [],
     isLoggingIn: false,
     error: null,
-    isLoading: false
+    isLoading: false,
+    guest: false
     // Array characters, Boolean fetching, null error.
   };
 
@@ -57,6 +60,17 @@ const initialState = {
                 isLoading: false,
                 data: action.payload,
                 error: null
+            }
+            case GUEST_ACTIVE: 
+                return {
+                ...state,
+                guest: true
+                }
+
+            case GUEST_INACTIVE: 
+            return {
+            ...state,
+            guest: false
             }
         default:
             return state;
