@@ -5,9 +5,7 @@ import bookshelf from '../bookshelf.jpg'
 import styled, {css, createGlobalStyle} from 'styled-components'
 
 
-
 const LoginContainer = styled.div`
-  
   background-image: url(${bookshelf});
   background-size: cover;
   width: 100%;
@@ -21,8 +19,7 @@ const LoginContainer = styled.div`
     color: #fff;
     text-shadow: 2px 2px 2px #000;  
     font-family: 'Bitter', serif;
-    }
-  
+    } 
 `
 const Button = styled.button`
 @keyframes pulse {
@@ -31,11 +28,9 @@ const Button = styled.button`
     50% {transform: scale(1.05);}
     75% {transform: scale(1.07);}
     100% {transform: scale(1.1);}
-    
-    
+     
   }
-  
-  
+   
   background-color: #565656;
   border: none;
   border-radius: 15px;
@@ -61,21 +56,16 @@ ${props =>
     css`
         background-color: #C09F80;
         color: white;
-        width: 75%;
+        width: 75%; 
         margin: 0 auto;
         margin-top: 1rem;
     `};
-
     &:hover {
         animation-name: pulse;
         animation-duration: .07s;
-    }
-
-    
-      }
-  
+    }  
+}
 `
-
 const Form = styled.form`
    display: flex;
    flex-direction: column;
@@ -101,25 +91,21 @@ const Form = styled.form`
     box-sizing: border-box;
     resize: vertical;
   }
-
   & .col-1 {
     float: left;
     width: 100%;
     margin-top: 6px;
   }
-
   .row:after {
     content: "";
     display: table;
     clear: both;
   }
-
   @media screen and (max-width: 600px) {
     .col-1, input, button {
       width: 100%;
     }
   }
-
   @media screen and (max-width: 900px) {
      button {
       font-size: .7rem;
@@ -128,14 +114,9 @@ const Form = styled.form`
     }
   }
 
-  
   & p {
       color: red;
   }
-
-
-  
- 
     `
   
 class Login extends React.Component {
