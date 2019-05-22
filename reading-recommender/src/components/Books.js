@@ -30,8 +30,9 @@ class Books extends React.Component {
 
     logOut = () => {
         localStorage.clear();
-        this.props.guestInactive(this.state.guest)
-        window.location.reload();
+        this.props.guestInactive(this.state.guest);
+        this.props.history.push('/')
+        //window.location.reload();
     }
     render() {
         return (
