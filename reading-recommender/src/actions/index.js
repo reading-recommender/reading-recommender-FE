@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, * as others from 'axios';
 import { axiosWithAuth } from '../axiosWithAuth';
 
 export const LOGIN_START = "LOGIN_START";
@@ -26,13 +26,31 @@ export const FETCH_DATA_FAIL = "FETCH_DATA_FAIL"
 export const getData = () => dispatch => {
     dispatch({type: FETCH_DATA_START });
     axiosWithAuth()
-    .get('https://reading-recommender.herokuapp.com/api/')
+    .get('https://reading-recommender.herokuapp.com/')
     .then(res => {
         console.log(res)
-       // dispatch({type: FETCH_DATA_SUCCESS, payload: res.data.data})
+       dispatch({type: FETCH_DATA_SUCCESS, payload: res.data.data})
     })
     .catch(err => {
-       // console.log(err)
-       // dispatch({ type: FETCH_DATA_FAIL, payload: err.data})
+        console.log(err)
+        //dispatch({ type: FETCH_DATA_FAIL, payload: err.data})
     })
+}
+
+
+
+export const GUEST_ACTIVE = "GUEST_ACTIVE"
+export const guestActive = state => {
+    return {
+        type: GUEST_ACTIVE,
+        payload: state
+    }
+}
+
+export const GUEST_INACTIVE = "GUEST_INACTIVE"
+export const guestInactive = state => {
+    return {
+        type: GUEST_INACTIVE,
+        payload: state
+    }
 }
