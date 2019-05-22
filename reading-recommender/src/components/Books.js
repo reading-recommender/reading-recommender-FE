@@ -26,6 +26,7 @@ class Books extends React.Component {
 
     componentDidMount() {
         this.props.getData()
+        
     }
 
     logOut = () => {
