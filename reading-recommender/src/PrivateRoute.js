@@ -14,6 +14,7 @@ import { privateDecrypt } from "crypto";
         if (localStorage.getItem("token") || guest) {
           return <Component questions={props.questions}{...props}/>;
           // console.log("testing")
+
         } else {
           return <Redirect to="/" />;
         }
