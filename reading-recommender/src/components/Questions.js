@@ -1,7 +1,7 @@
 import React from "react";
 
 import styled, {css} from 'styled-components'
-// import { connect } from "http2";
+
 import {fetchingQuestions} from "../actions"
 import {connect} from "react-redux"
 
@@ -23,10 +23,10 @@ const QuestionContainer = styled.div`
     `};
 `
 
-
-    }
+class Questions extends React.Component {
+   
   render(){
-      return(
+    return (
         <QuestionContainer>
 
             {questions.map(question => 
@@ -37,13 +37,10 @@ const QuestionContainer = styled.div`
                 )}
 
       </QuestionContainer>
-      )
-  }
-}
-const mapStateToProps = ({quizQuestions}) => ({
-    quizQuestions
-})
+    )
+}}
 
-export default connect(mapStateToProps, {fetchingQuestions})(Questions);
+
+export default connect(null, {})(Questions);
 
 
