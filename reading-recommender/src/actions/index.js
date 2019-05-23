@@ -26,7 +26,7 @@ export const FETCH_DATA_FAIL = "FETCH_DATA_FAIL"
 export const getData = () => dispatch => {
     dispatch({type: FETCH_DATA_START });
     axiosWithAuth()
-    .get('https://reading-recommender.herokuapp.com/')
+    .get('https://reading-recommender.herokuapp.com/api/login')
     .then(res => {
         console.log(res)
        dispatch({type: FETCH_DATA_SUCCESS, payload: res.data.data})
@@ -53,4 +53,25 @@ export const guestInactive = state => {
         type: GUEST_INACTIVE,
         payload: state
     }
+}
+
+
+
+
+export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
+export const SUCCESS_FETCH = 'SUCCESS_FETCH';
+export const FAILURE_FETCH = 'FAILURE_FETCH';
+
+export const fetchingQuestions = () => dispatch => {
+    dispatch({ type : FETCH_QUESTIONS })
+    axiosWithAuth()
+        .get('http://localhost:3333/api/quizQuestions')
+        .then(res => {
+            dispatch({ type : SUCCESS_FETCH, payload: res.data })
+                console.log("Fetch data", res.data);
+            })
+        .catch(err => {
+            dispatch({type:FAILURE_FETCH})
+            console.log("Axios call error", err);
+        })
 }

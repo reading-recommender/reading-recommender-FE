@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { getData } from '../actions';
+import { getData, guestInactive } from '../actions';
 import styled, {css} from 'styled-components';
 
 const Button = styled.button`
@@ -31,29 +31,25 @@ class Books extends React.Component {
 
     logOut = () => {
         localStorage.clear();
-        window.location.reload();
+        this.props.guestInactive(this.state.guest);
+        this.props.history.push('/')
+        //window.location.reload();
     }
     render() {
         return (
             
             <div>
                 <Button secondary onClick={this.logOut}>Log Out</Button>
-                {this.props.isLoading === true ? <h1>...Loading</h1> : null}
-               {!this.props.isLoading   && this.props.data.map((item, index) => 
-                   
-                <div key={index}>
-                    
-                    <p>{item.location}</p> 
-                </div>
-               ) }  
+                {this.props.isLoading === true ? <h1> {console.log(this.props.guest)}...Loading</h1> : null}
+               {!this.props.isLoading && console.log(this.props.data)}   
                
             </div>
         );
     }
 }
 
-const mapStateToProps = ({isLoading, data})=> ({
+const mapStateToProps = ({isLoading, data, guest})=> ({
     isLoading,
     data
 })
-export default connect(mapStateToProps, {getData})(Books);
+export default connect(mapStateToProps, {getData, guestInactive})(Books);

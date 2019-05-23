@@ -1,17 +1,23 @@
-
 import {
     LOGIN_START,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     FETCH_DATA_START,
     FETCH_DATA_SUCCESS,
-    FETCH_DATA_FAIL
+    FETCH_DATA_FAIL,
+    GUEST_ACTIVE,
+    GUEST_INACTIVE,
+    FETCH_QUESTIONS,
+    SUCCESS_FETCH,
+    FAILURE_FETCH,
 } from '../actions';
 const initialState = {
     data: [],
     isLoggingIn: false,
     error: null,
-    isLoading: false
+    isLoading: false,
+    guest: false,
+    quizQuestions: []
     // Array characters, Boolean fetching, null error.
   };
 
@@ -58,6 +64,33 @@ const initialState = {
                 data: action.payload,
                 error: null
             }
+            case GUEST_ACTIVE: 
+                return {
+                ...state,
+                guest: true
+                }
+
+            case GUEST_INACTIVE: 
+            return {
+            ...state,
+            guest: false
+            }
+
+            case FETCH_QUESTIONS : return {
+                ...state,
+                fetchingQuestions: true,
+                error: ''
+            }
+            case SUCCESS_FETCH : return {
+                ...state,
+                fetchingQuestions: false,
+                error: '',
+                quizQuestions: action.payload
+            }
+            case FAILURE_FETCH: return {
+                ...state,
+                error: 'This is an error'
+              }
         default:
             return state;
       }
