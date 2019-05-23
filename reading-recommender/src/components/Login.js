@@ -185,8 +185,9 @@ class Login extends React.Component {
         e.preventDefault();
         this.props.guestActive(this.state.guest)
         console.log(this.state.guest)
-        this.props.history.push('/questions')
-        
+
+        this.props.history.push('/questions')    
+
     }
 
     render(){
@@ -231,7 +232,9 @@ const mapStateToProps = ({isLoggingIn, error}) => ({
     error
 
   });
+
   export default connect(mapStateToProps,{login, guestActive, signUp})(Login)
+
 //   export default connect(
 //     mapStateToProps,
 //     { login }
