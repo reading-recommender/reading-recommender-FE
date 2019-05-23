@@ -1,6 +1,9 @@
 import React from "react";
 import Answer from "./Answer";
 import styled, {css} from 'styled-components'
+// import { connect } from "http2";
+import {fetchingQuestions} from "../actions"
+import {connect} from "react-redux"
 
 const QuestionContainer = styled.div`
   
@@ -18,17 +21,33 @@ const QuestionContainer = styled.div`
     `};
 `
 
-const Questions = props => {
-  // console.log(props.question.answers)
-  return <QuestionContainer>
-    <div><strong>Question: </strong>{props.question.question}</div>
-    <div><strong>Answers: {props.answer}</strong>
-    
-    {props.question.answers.map(answer => {
-    return <Answer key={answer.content} answer={answer.content}/>})}
-    
-    </div>
-  </QuestionContainer>;
-};
+class Questions extends React.Component {
+    componentDidMount(){
+        this.props.fetchingQuestions();
+    }
+  render(){
+      return(
+        <QuestionContainer>
+            {this.props.quizQuestions.map(item => 
+            <div>
+               <div><strong>Question: </strong>{item.question}</div>
+                {item.answers.map(answer => 
+                    <div> <h1>{answer.content}</h1> </div>
+                    )}
+            </div>
+            )}
+        
+      </QuestionContainer>
+      )
+  }
+}
+const mapStateToProps = ({quizQuestions}) => ({
+    quizQuestions
+})
+export default connect(mapStateToProps, {fetchingQuestions})(Questions);
+// export default Questions;
 
-export default Questions;
+ {/* {this.props.fetchingQuestions.answers.map(answer => {
+               return <Answer key={answer.content} answer={answer.content}/>})} */}
+               
+            //    <div><strong>Answers: {console.log(item.answers)}</strong></div>
