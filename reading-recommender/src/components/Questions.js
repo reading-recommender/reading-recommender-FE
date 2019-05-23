@@ -22,9 +22,11 @@ const QuestionContainer = styled.div`
       color: white;
     `};
 `
-    }
+
+class Questions extends React.Component {
+   
   render(){
-      return(
+    return (
         <QuestionContainer>
 
             {questions.map(question => 
@@ -35,13 +37,10 @@ const QuestionContainer = styled.div`
                 )}
 
       </QuestionContainer>
-      )
-  }
-}
-const mapStateToProps = ({quizQuestions}) => ({
-    quizQuestions
-})
+    )
+}}
 
-export default connect(mapStateToProps, {fetchingQuestions})(Questions);
+
+export default connect(null, {})(Questions);
 
 
