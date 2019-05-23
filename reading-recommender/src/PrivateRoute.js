@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
     <Route
       {...rest}
       render={(props) => {
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem("token" || guest )) {
           return <Component {...props} />;
         } else {
           return <Redirect to="/" />;
