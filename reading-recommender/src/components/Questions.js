@@ -1,10 +1,8 @@
 import React from "react";
-import Answer from "./Answer";
-import styled, { css } from 'styled-components'
-// import { connect } from "http2";
-import { fetchingQuestions } from "../actions"
-import { connect } from "react-redux"
+import styled, {css} from 'styled-components'
+import {connect} from "react-redux"
 import bookshelf from '../bookshelf.jpg'
+import {questions} from '../server'
 
 const QuestionContainer = styled.div`
 background-image: url(${bookshelf});
@@ -47,43 +45,55 @@ display: flex;
 flex-wrap: wrap;
 width:100%;
 border-top: 1px solid #0000003b;
-padding: 10px;
+padding: 40px;
 font-size: 1.1rem;
 color:black;
+align-items: center;
+cursor: pointer;
+& .answer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+& .selected {
+    display: hidden;
+}
 `
 
 
+
+
 class Questions extends React.Component {
-    componentDidMount() {
-        this.props.fetchingQuestions();
-    }
-    render() {
-        return (
-            <QuestionContainer>
-                {this.props.quizQuestions.map(item =>
-                    <QuestionContainerStyle>
-                        <QuestionStyle>
-                            <strong>Question: </strong>{item.question}
-                        </QuestionStyle>
-                {item.answers.map(answer =>
-                    <AnswersStyle>
-                    <div>{answer.content}</div>
-                    </AnswersStyle>
+    changeColorOnClick = event => {
+        event.target.style.backgroundColor = '#00ff80';
+        // event.target.classList.toggle('selected')
+        // event.target.parentNode.style.display = 'none';
+        console.log(event.target)
+        console.log(event.target.getAttribute('index'))
+     }
+
+  render(){
+    return (
+        <QuestionContainer>
+            {questions.map(question => 
+                <QuestionContainerStyle>
+                    <h1>{question.question}</h1>
+                    {question.answers.map((answer, index) => 
+                    <AnswersStyle key={index} index={index} onClick={this.changeColorOnClick}>{answer.content}</AnswersStyle>)}
+                </QuestionContainerStyle>
                 )}
-                    </QuestionContainerStyle>
-                )}
 
-            </QuestionContainer>
-        )
-    }
-}
-const mapStateToProps = ({ quizQuestions }) => ({
-    quizQuestions
-})
-export default connect(mapStateToProps, { fetchingQuestions })(Questions);
-// export default Questions;
+      </QuestionContainer>
+    )
+}}
 
-{/* {this.props.fetchingQuestions.answers.map(answer => {
-               return <Answer key={answer.content} answer={answer.content}/>})} */}
 
-            //    <div><strong>Answers: {console.log(item.answers)}</strong></div>
+export default connect(null, {})(Questions);
+
+
+
+
+
+
+

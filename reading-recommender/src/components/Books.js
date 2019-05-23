@@ -41,7 +41,13 @@ class Books extends React.Component {
             <div>
                 <Button secondary onClick={this.logOut}>Log Out</Button>
                 {this.props.isLoading === true ? <h1> {console.log(this.props.guest)}...Loading</h1> : null}
-               {!this.props.isLoading && console.log(this.props.data)}   
+
+               {!this.props.isLoading   && this.props.data.map((item, index) => 
+                   
+                <div key={index}>
+                    <p>{item.location}</p> 
+                </div>
+               ) }  
                
             </div>
         );
