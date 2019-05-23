@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {login, guestActive} from '../actions';
+import {login, guestActive, signUp} from '../actions';
 import bookshelf from '../bookshelf.jpg'
 import styled, {css, createGlobalStyle} from 'styled-components'
 
@@ -161,7 +161,7 @@ class Login extends React.Component {
         e.preventDefault();
         console.log(this.state.credentials)
         this.props.login(this.state.credentials).then(() => {
-            this.props.history.push('/books')
+            this.props.history.push('/questions')
         });
     }
 
@@ -176,15 +176,16 @@ class Login extends React.Component {
 
     submitUser = e => {
         e.preventDefault();
-       // this.submitUser(this.state.user)
+       this.props.signUp(this.state.user)
        console.log(this.state.user)
+       console.log('testsending')
     }
 
     handleGuest = (e) => {
         e.preventDefault();
         this.props.guestActive(this.state.guest)
         console.log(this.state.guest)
-        this.props.history.push('/books')
+        this.props.history.push('/questions')
         
     }
 
@@ -230,7 +231,7 @@ const mapStateToProps = ({isLoggingIn, error}) => ({
     error
 
   });
-  export default connect(mapStateToProps,{login, guestActive})(Login)
+  export default connect(mapStateToProps,{login, guestActive, signUp})(Login)
 //   export default connect(
 //     mapStateToProps,
 //     { login }

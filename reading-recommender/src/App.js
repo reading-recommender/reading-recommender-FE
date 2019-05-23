@@ -4,14 +4,14 @@ import './App.css';
 import {Route} from 'react-router-dom';
 import Login from './components/Login';
 import PrivateRoute from "./PrivateRoute";
-import Books from './components/Books';
+import Questions from './components/Questions';
 
 function App() {
   
   return (
     <div className="App">
       <Route exact path="/" component={Login} />
-      <PrivateRoute exact path="/books"  component={Books} />
+      <PrivateRoute exact path="/questions"  component={Questions} />
     </div>
   );
 }
