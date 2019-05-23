@@ -75,3 +75,12 @@ export const guestInactive = state => {
     }
 }
 
+
+
+export const handleSubmit = data => {
+    
+    
+      //type: ADD_SMURF,
+      console.log(data)
+    
+}
