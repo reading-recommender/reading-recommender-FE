@@ -50,6 +50,7 @@ const Button = styled.button`
       background-color: #76323F;
       color: white;
     `};
+
 ${props =>
     props.guest &&
     css`
@@ -112,6 +113,7 @@ const Form = styled.form`
       margin-bottom: 5px;
     }
   }
+
   & p {
       color: red;
   }
@@ -182,8 +184,7 @@ class Login extends React.Component {
         e.preventDefault();
         this.props.guestActive(this.state.guest)
         console.log(this.state.guest)
-        this.props.history.push('/questions')
-        
+        this.props.history.push('/questions')    
     }
 
     render(){
@@ -228,7 +229,9 @@ const mapStateToProps = ({isLoggingIn, error}) => ({
     error
 
   });
-  export default connect(mapStateToProps,{login, guestActive,})(Login)
+
+  export default connect(mapStateToProps,{login, guestActive})(Login)
+
 //   export default connect(
 //     mapStateToProps,
 //     { login }
