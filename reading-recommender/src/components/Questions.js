@@ -1,10 +1,12 @@
 import React from "react";
-//import Answer from "./Answer";
+
 import styled, {css} from 'styled-components'
 // import { connect } from "http2";
 import {fetchingQuestions} from "../actions"
 import {connect} from "react-redux"
+
 import {questions} from '../server'
+
 const QuestionContainer = styled.div`
   
   background-color: #565656;
@@ -21,20 +23,19 @@ const QuestionContainer = styled.div`
     `};
 `
 
-class Questions extends React.Component {
-    componentDidMount(){
-       
+
     }
   render(){
       return(
         <QuestionContainer>
+
             {questions.map(question => 
                 <div>
                     <h1>{question.question}</h1>
                      {question.answers.map(answer => <p>{answer.content}</p>)}
                 </div>
                 )}
-        
+
       </QuestionContainer>
       )
   }
@@ -42,4 +43,7 @@ class Questions extends React.Component {
 const mapStateToProps = ({quizQuestions}) => ({
     quizQuestions
 })
+
 export default connect(mapStateToProps, {fetchingQuestions})(Questions);
+
+
