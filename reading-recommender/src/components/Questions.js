@@ -87,14 +87,15 @@ class Questions extends React.Component {
      }
      
      submitAnswer = (question, answer) => {
-         console.log(`hey the question is ${question}  and the answer is ${answer}`)
+       
          this.setState({
              submissions: {
                 ...this.state.submissions,
-                 [`Q${question}`]: answer
+                [`Q${question}`]: answer
              }
          })
-         //this.props.handleSubmit('this.state.submissions')
+         //this.props.handleSubmit(this.state.submissions)
+        return this.state.submissions
      }
 
   render(){
@@ -112,7 +113,7 @@ class Questions extends React.Component {
                      }}>{answer.content}</AnswersStyle>)}
                 </QuestionContainerStyle>
                 )}
-
+                <button onClick={() => this.props.handleSubmit(this.state.submissions)}></button>        
       </QuestionContainer>
     )
 }}

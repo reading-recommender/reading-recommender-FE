@@ -77,10 +77,21 @@ export const guestInactive = state => {
 
 
 
-export const handleSubmit = data => {
-    
-    
-      //type: ADD_SMURF,
-      console.log(data)
-    
+export const SUBMIT_START = "SUBMIT_START"
+export const SUBMIT_SUCCESS = "SUBMIT_SUCCESS"
+export const SUBMIT_FAIL = "SUBMIT_FAIL"
+export const handleSubmit = creds => dispatch => {
+    dispatch({ type: SIGNUP_START });
+    return axios
+        .post('https://reader-recommend.herokuapp.com/recommend', creds)
+        .then(res => {
+            console.log(res)
+            //localStorage.setItem("token", res.data.payload);
+            dispatch({ type: SUBMIT_SUCCESS, payload: res.data.payload})
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({ type: SUBMIT_FAIL, payload: ''})
+        })
+
 }
