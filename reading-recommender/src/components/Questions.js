@@ -182,8 +182,17 @@ class Questions extends React.Component {
          this.props.history.push('/')
      }
 
-     newQuiz = e => {
-         
+     resetSubmissions = e => {
+         this.setState({
+             submissions: {
+            'Q1': '',
+            'Q2': '',
+            'Q3': '',
+            'Q4': '',
+            'Q5': '',
+            'Q6': ''
+         }})
+         return this.state.submissions
          
      }
 
@@ -219,7 +228,10 @@ class Questions extends React.Component {
                             <h1>{this.props.book.book}</h1>
                             <h2>By: {this.props.book.author}</h2>
                             <h3>{this.props.book.description}</h3>
-                            <Button onClick={() => this.props.newQuiz()}>Take the quiz again!</Button>
+                            <Button onClick={(e) => {
+                                this.resetSubmissions();
+                                this.props.newQuiz()
+                             }}>Take the quiz again!</Button>
                         </CardStyle>
                     }
                 </div>   

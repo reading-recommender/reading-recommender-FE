@@ -101,7 +101,8 @@ const initialState = {
             case NEW_QUIZ:
             return {
             ...state,
-            book: false
+            book: false,
+            newUser: false
             }
             
             
