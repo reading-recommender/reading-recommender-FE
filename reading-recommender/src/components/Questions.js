@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import {connect} from "react-redux"
 import bookshelf from '../bookshelf.jpg'
 import {questions} from '../server'
-import {handleSubmit, newQuiz} from '../actions'
+import {handleSubmit, newQuiz, logOut} from '../actions'
 
 const QuestionContainer = styled.div`
 //background-image: url(${bookshelf});
@@ -179,6 +179,7 @@ class Questions extends React.Component {
 
      logOut = e => {
          localStorage.clear();
+         this.props.logOut()
          this.props.history.push('/')
      }
 
@@ -246,4 +247,4 @@ const mapStateToProps = (state) => ({
     submitFail: state.submitFail
 
   });
-export default connect(mapStateToProps, {handleSubmit,newQuiz})(Questions);
+export default connect(mapStateToProps, {handleSubmit,newQuiz,logOut})(Questions);
