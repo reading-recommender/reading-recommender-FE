@@ -21,7 +21,8 @@ const initialState = {
     guest: false,
     book: false,
     newUser: false,
-    pending: false
+    pending: false,
+    submitFail: false
 
     // Array characters, Boolean fetching, null error.
   };
@@ -60,12 +61,14 @@ const initialState = {
             case SUBMIT_START:
             return {
             ...state,
-            isLoading: true
+            isLoading: true,
+            submitFail: false
             }
             case SUBMIT_FAIL:
             return {
             ...state,
-            isLoading: false
+            isLoading: false,
+            submitFail: true
             }
 
             case SUBMIT_SUCCESS:

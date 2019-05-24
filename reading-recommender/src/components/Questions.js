@@ -28,9 +28,17 @@ overflow-y: scroll;
       display: flex;
       flex-direction: column;
   }
+  & p {
+      background-color: #D7CEC7;
+      color: red;
+      padding: 10px;
+      width: fit-content;
+      margin: 0 auto;
+      border-radius: 15px;
+  }
 `
 const CardStyle = styled.div`
-background-color: #ffffffe8;
+background-color: #D7CEC7;
 border: 1px solid black;
 color: #fff
 padding: 1rem 2rem;
@@ -41,6 +49,7 @@ display: flex;
 flex-wrap: wrap;
 margin-bottom: 40px;
 border-radius: 15px;
+text-align: left;
 
 ${props =>
     props.book &&
@@ -193,12 +202,13 @@ class Questions extends React.Component {
                 </CardStyle> 
                 )} 
                 <div className="buttons">
+                     {this.props.submitFail && <p>You have not answered all the questions</p>}
                     <Button onClick={() => this.props.handleSubmit(this.state.submissions)}>Submit Answers</Button>  
                     <Button secondary onClick={this.logOut}>Log Out</Button>   
                 </div>
             </div> }
                 <div>
-                     {this.props.isLoading && <h1>...Loading</h1>}
+                     {this.props.isLoading && <h1>...Loading Results</h1>}
                      {this.props.book === false ? null : 
                         <CardStyle book>
                             <h1>{this.props.book.book}</h1>
@@ -214,7 +224,8 @@ class Questions extends React.Component {
 const mapStateToProps = (state) => ({
     book: state.book,
     isLoading: state.isLoading,
-    guest: state.guest
+    guest: state.guest,
+    submitFail: state.submitFail
 
   });
 export default connect(mapStateToProps, {handleSubmit})(Questions);
