@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import {connect} from "react-redux"
 import bookshelf from '../bookshelf.jpg'
 import {questions} from '../server'
-import {handleSubmit} from '../actions'
+import {handleSubmit, newQuiz} from '../actions'
 
 const QuestionContainer = styled.div`
 //background-image: url(${bookshelf});
@@ -23,9 +23,22 @@ overflow-y: scroll;
   text-shadow: 2px 2px 2px #000;  
   font-family: 'Bitter', serif;
   } 
+
+  & .buttons {
+      display: flex;
+      flex-direction: column;
+  }
+  & p {
+      background-color: #D7CEC7;
+      color: red;
+      padding: 10px;
+      width: fit-content;
+      margin: 0 auto;
+      border-radius: 15px;
+  }
 `
 const CardStyle = styled.div`
-background-color: #ffffffe8;
+background-color: #D7CEC7;
 border: 1px solid black;
 color: #fff
 padding: 1rem 2rem;
@@ -36,6 +49,7 @@ display: flex;
 flex-wrap: wrap;
 margin-bottom: 40px;
 border-radius: 15px;
+text-align: left;
 
 ${props =>
     props.book &&
@@ -108,6 +122,12 @@ const Button = styled.button`
     animation-name: pulse;
     animation-duration: .07s;
 }  
+
+${props =>
+    props.secondary &&
+    css`
+      background-color: #76323F;
+    `};
   
 `
 
@@ -123,7 +143,19 @@ class Questions extends React.Component {
         }
     }
     changeColor = (e) => {
-       e.target.style.backgroundColor = '#00ff80';
+       const questions = Array.from(document.querySelectorAll('.questions'));
+       questions.map(function(question) {
+           const answers = Array.from(question.querySelectorAll('.answers'));
+           //console.log(answers.parentElement)
+           answers.map(function(answer) {
+               if (e.target.parentNode === answer.parentNode) {
+                   answer.style.backgroundColor = 'initial'
+               }
+           });
+       })
+        
+      // console.log(answers)
+        e.target.style.backgroundColor = '#00ff80';
        //this.submitAnswer
      }
 
@@ -145,6 +177,16 @@ class Questions extends React.Component {
         return this.state.submissions
      }
 
+     logOut = e => {
+         localStorage.clear();
+         this.props.history.push('/')
+     }
+
+     newQuiz = e => {
+         
+         
+     }
+
      
 
   render(){
@@ -153,7 +195,7 @@ class Questions extends React.Component {
         {!this.props.book &&
             <div>
             {questions.map((question, index) =>  
-                <CardStyle key={index}>
+                <CardStyle className="questions" index={index} key={index}>
                     <h1>{question.question}</h1>
                     {question.answers.map((answer, index) => 
                     <AnswersStyle key={index} className="answers" 
@@ -164,15 +206,20 @@ class Questions extends React.Component {
                      }}>{answer.content}</AnswersStyle>)}
                 </CardStyle> 
                 )} 
-                <Button onClick={() => this.props.handleSubmit(this.state.submissions)}>Submit Answers</Button>   
+                <div className="buttons">
+                     {this.props.submitFail && <p>You have not answered all the questions</p>}
+                    <Button onClick={() => this.props.handleSubmit(this.state.submissions)}>Submit Answers</Button>  
+                    <Button secondary onClick={this.logOut}>Log Out</Button>   
+                </div>
             </div> }
                 <div>
-                     {this.props.isLoading && <h1>...Loading</h1>}
+                     {this.props.isLoading && <h1>...Loading Results</h1>}
                      {this.props.book === false ? null : 
                         <CardStyle book>
                             <h1>{this.props.book.book}</h1>
                             <h2>By: {this.props.book.author}</h2>
                             <h3>{this.props.book.description}</h3>
+                            <Button onClick={() => this.props.newQuiz()}>Take the quiz again!</Button>
                         </CardStyle>
                     }
                 </div>   
@@ -182,7 +229,9 @@ class Questions extends React.Component {
 
 const mapStateToProps = (state) => ({
     book: state.book,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
+    guest: state.guest,
+    submitFail: state.submitFail
 
   });
-export default connect(mapStateToProps, {handleSubmit})(Questions);
+export default connect(mapStateToProps, {handleSubmit,newQuiz})(Questions);

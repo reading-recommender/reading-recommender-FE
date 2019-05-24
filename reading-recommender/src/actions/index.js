@@ -79,3 +79,11 @@ export const handleSubmit = creds => dispatch => {
         })
 
 }
+
+export const NEW_QUIZ = "NEW_QUIZ"
+export const newQuiz = () => {
+    return {
+        type: NEW_QUIZ
+        
+    }
+}
