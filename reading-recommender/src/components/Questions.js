@@ -8,15 +8,14 @@ import {handleSubmit, newQuiz, logOut} from '../actions'
 const QuestionContainer = styled.div`
 //background-image: url(${bookshelf});
 background-size: cover;
-width: 100%;
+width: 90%;
 height: 100%;
 display: flex;
 justify-content: center;
 flex-direction: column;
 background-position: center;
 padding: 20px;
-width: 100vw;
-
+-webkit-overflow-scrolling: touch !important;
 overflow-y: scroll;
 & h1 {
   color: #fff;
@@ -43,8 +42,8 @@ border: 1px solid black;
 color: #fff
 padding: 1rem 2rem;
 margin: 0 auto;
-min-width: 50%;
-max-width: 50%;
+width: 90%;
+max-width: fit-content;
 display: flex;
 flex-wrap: wrap;
 margin-bottom: 40px;
@@ -66,6 +65,11 @@ ${props =>
       }
     `};
 
+    @media (max-width: 400px) {
+        width: fit-content;
+      
+    }
+
 `
 // const QuestionStyle = styled.div`
 // display: flex;
@@ -78,7 +82,8 @@ ${props =>
 const AnswersStyle = styled.div`
 display: flex;
 flex-wrap: wrap;
-width:100%;
+width: 90%;
+max-width: 800px;
 border-top: 1px solid #0000003b;
 padding: 40px;
 font-size: 1.1rem;
@@ -93,6 +98,11 @@ cursor: pointer;
 }
 & .selected {
     display: hidden;
+}
+
+@media (max-width: 400px) {
+    max-width: 300px;
+  
 }
 `
 
@@ -123,6 +133,10 @@ const Button = styled.button`
     animation-duration: .07s;
 }  
 
+@media (max-width: 400px) {
+    width: 90%;
+  
+}
 ${props =>
     props.secondary &&
     css`
