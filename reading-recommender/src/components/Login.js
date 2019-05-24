@@ -117,6 +117,9 @@ const Form = styled.form`
   & p {
       color: red;
   }
+  & .successCreate {
+    color: limegreen;
+}
     `
   
 class Login extends React.Component {
@@ -179,6 +182,10 @@ class Login extends React.Component {
        this.props.signUp(this.state.user)
        console.log(this.state.user)
        console.log('testsending')
+
+       
+       this.setState({loginForm:true,signupForm:false})
+       
     }
 
     handleGuest = (e) => {
@@ -197,6 +204,8 @@ class Login extends React.Component {
                 <h1>{this.state.loginForm ? 'Login' : 'Sign Up'}</h1>
                 {this.state.loginForm && 
                 <Form className="login-form" onSubmit={this.login}>
+                {this.props.newUser === true ? <p className="successCreate">You have successfully created an account</p> : null}
+                {this.props.pending === true && this.props.newUser === false ? <p>{this.props.error}</p> : null}
                     <div className="row">
                         <div className="col-1">
                          <input type="text" name="username" value={this.state.credentials.username}  onChange={this.handleChange} required />
@@ -207,7 +216,7 @@ class Login extends React.Component {
                             <input type="password" name="password" value={this.state.credentials.password} onChange={this.handleChange} required />
                         </div>
                     </div>
-                    {this.props.error !== null ? <p>Wrong username or pasword. Please try again</p> : null}
+                    {this.props.error !== null && this.props.pending === false  ? <p>Wrong username or pasword. Please try again</p> : null}
                     <Button >Login</Button>
                     <Button secondary onClick={()=> this.setState({loginForm:false,signupForm:true})}>Sign Up</Button>
                     <Button guest onClick={this.handleGuest}>Continue as Guest</Button>
@@ -227,9 +236,11 @@ class Login extends React.Component {
 }
 
 
-const mapStateToProps = ({isLoggingIn, error}) => ({
+const mapStateToProps = ({isLoggingIn, error, newUser, pending}) => ({
     isLoggingIn,
-    error
+    error,
+    newUser,
+    pending
 
   });
 

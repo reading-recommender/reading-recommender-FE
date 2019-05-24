@@ -23,6 +23,11 @@ overflow-y: scroll;
   text-shadow: 2px 2px 2px #000;  
   font-family: 'Bitter', serif;
   } 
+
+  & .buttons {
+      display: flex;
+      flex-direction: column;
+  }
 `
 const CardStyle = styled.div`
 background-color: #ffffffe8;
@@ -108,6 +113,12 @@ const Button = styled.button`
     animation-name: pulse;
     animation-duration: .07s;
 }  
+
+${props =>
+    props.secondary &&
+    css`
+      background-color: #76323F;
+    `};
   
 `
 
@@ -123,7 +134,9 @@ class Questions extends React.Component {
         }
     }
     changeColor = (e) => {
-       e.target.style.backgroundColor = '#00ff80';
+       const answers = Array.from(document.querySelectorAll('.answers'));
+       answers.map(answer => answer.style.backgroundColor = 'initial')
+        e.target.style.backgroundColor = '#00ff80';
        //this.submitAnswer
      }
 
@@ -145,6 +158,11 @@ class Questions extends React.Component {
         return this.state.submissions
      }
 
+     logOut = e => {
+         localStorage.clear();
+         this.props.history.push('/')
+     }
+
      
 
   render(){
@@ -164,7 +182,10 @@ class Questions extends React.Component {
                      }}>{answer.content}</AnswersStyle>)}
                 </CardStyle> 
                 )} 
-                <Button onClick={() => this.props.handleSubmit(this.state.submissions)}>Submit Answers</Button>   
+                <div className="buttons">
+                    <Button onClick={() => this.props.handleSubmit(this.state.submissions)}>Submit Answers</Button>  
+                    <Button secondary onClick={this.logOut}>Log Out</Button>   
+                </div>
             </div> }
                 <div>
                      {this.props.isLoading && <h1>...Loading</h1>}
@@ -182,7 +203,8 @@ class Questions extends React.Component {
 
 const mapStateToProps = (state) => ({
     book: state.book,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
+    guest: state.guest
 
   });
 export default connect(mapStateToProps, {handleSubmit})(Questions);
