@@ -9,7 +9,8 @@ import {
     SUBMIT_FAIL,
     SIGNUP_START,
     SIGNUP_SUCCESS,
-    SIGNUP_FAIL
+    SIGNUP_FAIL,
+    NEW_QUIZ
    
 
 } from '../actions';
@@ -97,6 +98,12 @@ const initialState = {
             error: "User already exists, please select another username",
             pending: true
             }
+            case NEW_QUIZ:
+            return {
+            ...state,
+            book: false
+            }
+            
             
         default:
             return state;

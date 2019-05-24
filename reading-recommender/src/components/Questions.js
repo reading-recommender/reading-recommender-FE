@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components'
 import {connect} from "react-redux"
 import bookshelf from '../bookshelf.jpg'
 import {questions} from '../server'
-import {handleSubmit} from '../actions'
+import {handleSubmit, newQuiz} from '../actions'
 
 const QuestionContainer = styled.div`
 //background-image: url(${bookshelf});
@@ -182,6 +182,11 @@ class Questions extends React.Component {
          this.props.history.push('/')
      }
 
+     newQuiz = e => {
+         
+         
+     }
+
      
 
   render(){
@@ -214,6 +219,7 @@ class Questions extends React.Component {
                             <h1>{this.props.book.book}</h1>
                             <h2>By: {this.props.book.author}</h2>
                             <h3>{this.props.book.description}</h3>
+                            <Button onClick={() => this.props.newQuiz()}>Take the quiz again!</Button>
                         </CardStyle>
                     }
                 </div>   
@@ -228,4 +234,4 @@ const mapStateToProps = (state) => ({
     submitFail: state.submitFail
 
   });
-export default connect(mapStateToProps, {handleSubmit})(Questions);
+export default connect(mapStateToProps, {handleSubmit,newQuiz})(Questions);
