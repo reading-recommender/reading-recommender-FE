@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {login, guestActive, signUp} from '../actions';
+import {login, guestActive, signUp, logOut} from '../actions';
 import bookshelf from '../bookshelf.jpg'
 import styled, {css, createGlobalStyle} from 'styled-components'
 
@@ -8,7 +8,7 @@ import styled, {css, createGlobalStyle} from 'styled-components'
 const LoginContainer = styled.div`
   //background-image: url(${bookshelf});
   background-size: cover;
-  width: 100%;
+
   height: 100%;
   display: flex;
   justify-content: center;
@@ -23,9 +23,11 @@ const LoginContainer = styled.div`
     } 
 
 @media (max-width: 400px) {
-    width: fit-content;
-  
+    //width: fit-content;
+    background-color: red;
 }
+
+
 `
 const Button = styled.button`
 @keyframes pulse {
@@ -83,6 +85,11 @@ const Form = styled.form`
    border-radius: 30px;
    box-shadow: -5px 5px 5px #000;
    max-width: 700px;
+   & label {
+    font-family: 'Bitter', serif;
+    float: left;
+    margin: 5px;
+    }
    
    & input {
     // height: 2rem;
@@ -188,9 +195,9 @@ class Login extends React.Component {
        this.props.signUp(this.state.user)
        console.log(this.state.user)
        console.log('testsending')
-
        
        this.setState({loginForm:true,signupForm:false})
+      
        
     }
 
@@ -198,7 +205,7 @@ class Login extends React.Component {
         e.preventDefault();
         this.props.guestActive(this.state.guest)
         console.log(this.state.guest)
-
+ 
         this.props.history.push('/questions')    
 
     }
@@ -210,16 +217,18 @@ class Login extends React.Component {
                 <h1>{this.state.loginForm ? 'Login' : 'Sign Up'}</h1>
                 {this.state.loginForm && 
                 <Form className="login-form" onSubmit={this.login}>
-                {this.props.newUser === true ? <p className="successCreate">You have successfully created an account</p> : null}
+                {this.props.newUser === true ?  <p className="successCreate">{localStorage.clear()}You have successfully created an account</p> : null}
                 {this.props.pending === true && this.props.newUser === false ? <p>{this.props.error}</p> : null}
                     <div className="row">
                         <div className="col-1">
-                         <input type="text" name="username" value={this.state.credentials.username}  onChange={this.handleChange} required />
+                         <label for="username">Username:</label>
+                         <input type="text" id="username" name="username" value={this.state.credentials.username}  onChange={this.handleChange} required />
                       </div>
                     </div>
                     <div className="row">
                         <div className="col-1">
-                            <input type="password" name="password" value={this.state.credentials.password} onChange={this.handleChange} required />
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" value={this.state.credentials.password} onChange={this.handleChange} required />
                         </div>
                     </div>
                     {this.props.error !== null && this.props.pending === false  ? <p>Wrong username or pasword. Please try again</p> : null}
@@ -228,9 +237,19 @@ class Login extends React.Component {
                     <Button guest onClick={this.handleGuest}>Continue as Guest</Button>
                 </Form> }
                 {this.state.signupForm && 
-                <Form onSubmit={this.submitUser} autoComplete="false">
-                    <input name="username" type="text" onChange={this.handleChange} value={this.state.username} required/>
-                    <input name="password" type="password" onChange={this.handleChange} value={this.state.password} requried />
+                <Form onSubmit={this.submitUser} className="submit-form" autoComplete="false">
+                    <div className="row">
+                        <div className="col-1">
+                        <label for="username">Username:</label>
+                        <input name="username" id="username" placeholder="username" type="text" onChange={this.handleChange} value={this.state.username} required/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-1">
+                        <label for="password">Password:</label>
+                        <input name="password" id="password" type="password" placeholder="password" onChange={this.handleChange} value={this.state.password} requried />
+                        </div>
+                    </div>              
                     <Button>Sign Up</Button>
                     <Button secondary onClick={()=> this.setState({loginForm:true,signupForm:false})}>Cancel</Button>
                     
@@ -250,7 +269,7 @@ const mapStateToProps = ({isLoggingIn, error, newUser, pending}) => ({
 
   });
 
-  export default connect(mapStateToProps,{login, guestActive, signUp})(Login)
+  export default connect(mapStateToProps,{login, guestActive, signUp, logOut})(Login)
 
 //   export default connect(
 //     mapStateToProps,

@@ -42,13 +42,13 @@ border: 1px solid black;
 color: #fff
 padding: 1rem 2rem;
 margin: 0 auto;
-width: 90%;
-max-width: fit-content;
+max-width: 800px;
 display: flex;
 flex-wrap: wrap;
 margin-bottom: 40px;
 border-radius: 15px;
 text-align: left;
+
 
 ${props =>
     props.book &&
@@ -65,10 +65,7 @@ ${props =>
       }
     `};
 
-    @media (max-width: 400px) {
-        width: fit-content;
-      
-    }
+    
 
 `
 // const QuestionStyle = styled.div`
@@ -133,10 +130,10 @@ const Button = styled.button`
     animation-duration: .07s;
 }  
 
-@media (max-width: 400px) {
+@media (max-width: 800px) {
     width: 90%;
   
-}
+};
 ${props =>
     props.secondary &&
     css`
