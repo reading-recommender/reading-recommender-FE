@@ -134,8 +134,18 @@ class Questions extends React.Component {
         }
     }
     changeColor = (e) => {
-       const answers = Array.from(document.querySelectorAll('.answers'));
-       answers.map(answer => answer.style.backgroundColor = 'initial')
+       const questions = Array.from(document.querySelectorAll('.questions'));
+       questions.map(function(question) {
+           const answers = Array.from(question.querySelectorAll('.answers'));
+           //console.log(answers.parentElement)
+           answers.map(function(answer) {
+               if (e.target.parentNode === answer.parentNode) {
+                   answer.style.backgroundColor = 'initial'
+               }
+           });
+       })
+        
+      // console.log(answers)
         e.target.style.backgroundColor = '#00ff80';
        //this.submitAnswer
      }
@@ -171,7 +181,7 @@ class Questions extends React.Component {
         {!this.props.book &&
             <div>
             {questions.map((question, index) =>  
-                <CardStyle key={index}>
+                <CardStyle className="questions" index={index} key={index}>
                     <h1>{question.question}</h1>
                     {question.answers.map((answer, index) => 
                     <AnswersStyle key={index} className="answers" 
