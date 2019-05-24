@@ -83,7 +83,8 @@ const initialState = {
             return {
             ...state,
             newUser: true,
-            pending: false
+            pending: false,
+            error: null
             }
             case SIGNUP_START:
             return {
