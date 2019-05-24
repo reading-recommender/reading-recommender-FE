@@ -2,11 +2,11 @@ import {
     LOGIN_START,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    FETCH_DATA_START,
-    FETCH_DATA_SUCCESS,
-    FETCH_DATA_FAIL,
     GUEST_ACTIVE,
-    GUEST_INACTIVE
+    GUEST_INACTIVE,
+    SUBMIT_START,
+    SUBMIT_SUCCESS,
+    SUBMIT_FAIL
    
 
 } from '../actions';
@@ -16,7 +16,7 @@ const initialState = {
     error: null,
     isLoading: false,
     guest: false,
-    quizQuestions: []
+    book: false
 
     // Array characters, Boolean fetching, null error.
   };
@@ -39,31 +39,7 @@ const initialState = {
                 loggingIn: false,
                 error: action.payload
             }
-            case FETCH_DATA_START:
-             return {
-                ...state,
-                isLoading: true,
-                error: null
-            }
-            case FETCH_DATA_SUCCESS:
-             return {
-                ...state,
-                isLoading: false,
-                data: action.payload,
-                // .filter(price => price.type === "Gasoline - Regular")
-                // .filter(
-                //   price =>
-                //     price.location === "US" || price.location === "State of Hawaii"
-                // ),
-                error: null
-            }
-            case FETCH_DATA_FAIL:
-             return {
-                ...state,
-                isLoading: false,
-                data: action.payload,
-                error: null
-            }
+           
             case GUEST_ACTIVE: 
                 return {
                 ...state,
@@ -74,6 +50,23 @@ const initialState = {
             return {
             ...state,
             guest: false
+            }
+            case SUBMIT_START:
+            return {
+            ...state,
+            isLoading: true
+            }
+            case SUBMIT_FAIL:
+            return {
+            ...state,
+            isLoading: false
+            }
+
+            case SUBMIT_SUCCESS:
+            return {
+            ...state,
+            book: action.payload,
+            isLoading: false
             }
             
         default:
