@@ -15,13 +15,16 @@ justify-content: center;
 flex-direction: column;
 background-position: center;
 padding: 20px;
+width: 100vw;
+height: 100vh;
+overflow-y: scroll;
 & h1 {
   color: #fff;
   text-shadow: 2px 2px 2px #000;  
   font-family: 'Bitter', serif;
   } 
 `
-const QuestionContainerStyle = styled.div`
+const CardStyle = styled.div`
 background-color: #ffffffe8;
 border: 1px solid black;
 color: #fff
@@ -32,15 +35,32 @@ max-width: 50%;
 display: flex;
 flex-wrap: wrap;
 margin-bottom: 40px;
+border-radius: 15px;
+
+${props =>
+    props.book &&
+    css`
+      display: flex;
+      flex-direction: column;
+      & h1,h2 {
+          color: #fff;
+          text-shadow: 2px 2px 2px #000;
+          font-family: 'Bitter', serif;
+      }
+      & h3 {
+          color: #000;
+      }
+    `};
+
 `
-const QuestionStyle = styled.div`
-display: flex;
-flex-wrap: wrap;
-width:100%;
-padding: 10px;
-font-size: 1.3rem;
-color:black;
-`
+// const QuestionStyle = styled.div`
+// display: flex;
+// flex-wrap: wrap;
+// width:100%;
+// padding: 10px;
+// font-size: 1.3rem;
+// color:black;
+// `
 const AnswersStyle = styled.div`
 display: flex;
 flex-wrap: wrap;
@@ -62,8 +82,34 @@ cursor: pointer;
 }
 `
 
-
-
+const Button = styled.button`
+@keyframes pulse {
+    0%   {transform: scale(1);}
+    25%  {transform: scale(1.02);}
+    50% {transform: scale(1.05);}
+    75% {transform: scale(1.07);}
+    100% {transform: scale(1.1);}
+     
+  }
+   
+  background-color: #C09F80;
+  border: none;
+  border-radius: 15px;
+  color: #fff;
+  padding: 2rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-family: 'Bitter', serif;
+  font-size: 1rem;
+  width: 45%;
+  &:hover {
+    animation-name: pulse;
+    animation-duration: .07s;
+}  
+  
+`
 
 class Questions extends React.Component {
     state = {
@@ -95,14 +141,19 @@ class Questions extends React.Component {
              }
          })
          //this.props.handleSubmit(this.state.submissions)
+         
         return this.state.submissions
      }
+
+     
 
   render(){
     return (
         <QuestionContainer>
-            {questions.map((question, index) => 
-                <QuestionContainerStyle key={index}>
+        {!this.props.book &&
+            <div>
+            {questions.map((question, index) =>  
+                <CardStyle key={index}>
                     <h1>{question.question}</h1>
                     {question.answers.map((answer, index) => 
                     <AnswersStyle key={index} className="answers" 
@@ -111,12 +162,27 @@ class Questions extends React.Component {
                         this.changeColor(e);
                         this.submitAnswer( question.id, index + 1)
                      }}>{answer.content}</AnswersStyle>)}
-                </QuestionContainerStyle>
-                )}
-                <button onClick={() => this.props.handleSubmit(this.state.submissions)}></button>        
+                </CardStyle> 
+                )} 
+                <Button onClick={() => this.props.handleSubmit(this.state.submissions)}>Submit Answers</Button>   
+            </div> }
+                <div>
+                     {this.props.isLoading && <h1>...Loading</h1>}
+                     {this.props.book === false ? null : 
+                        <CardStyle book>
+                            <h1>{this.props.book.book}</h1>
+                            <h2>By: {this.props.book.author}</h2>
+                            <h3>{this.props.book.description}</h3>
+                        </CardStyle>
+                    }
+                </div>   
       </QuestionContainer>
     )
 }}
 
+const mapStateToProps = (state) => ({
+    book: state.book,
+    isLoading: state.isLoading
 
-export default connect(null, {handleSubmit})(Questions);
+  });
+export default connect(mapStateToProps, {handleSubmit})(Questions);

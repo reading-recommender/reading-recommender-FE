@@ -39,23 +39,7 @@ export const signUp = creds => dispatch => {
 
 }
 
-export const FETCH_DATA_START = "FETCH_DATA_START"
-export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS"
-export const FETCH_DATA_FAIL = "FETCH_DATA_FAIL"
-export const getData = () => dispatch => {
-    dispatch({type: FETCH_DATA_START });
-    axiosWithAuth()
-    .get('https://reading-recommender.herokuapp.com/api/login')
 
-    .then(res => {
-        console.log(res)
-       dispatch({type: FETCH_DATA_SUCCESS, payload: res.data.data})
-    })
-    .catch(err => {
-        console.log(err)
-        dispatch({ type: FETCH_DATA_FAIL, payload: err.data})
-    })
-}
 
 
 
@@ -81,13 +65,13 @@ export const SUBMIT_START = "SUBMIT_START"
 export const SUBMIT_SUCCESS = "SUBMIT_SUCCESS"
 export const SUBMIT_FAIL = "SUBMIT_FAIL"
 export const handleSubmit = creds => dispatch => {
-    dispatch({ type: SIGNUP_START });
+    dispatch({ type: SUBMIT_START });
     return axios
         .post('https://reader-recommend.herokuapp.com/recommend', creds)
         .then(res => {
             console.log(res)
             //localStorage.setItem("token", res.data.payload);
-            dispatch({ type: SUBMIT_SUCCESS, payload: res.data.payload})
+            dispatch({ type: SUBMIT_SUCCESS, payload: res.data})
         })
         .catch(err => {
             console.log(err)
