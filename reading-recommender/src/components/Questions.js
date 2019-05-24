@@ -6,7 +6,7 @@ import {questions} from '../server'
 import {handleSubmit} from '../actions'
 
 const QuestionContainer = styled.div`
-background-image: url(${bookshelf});
+//background-image: url(${bookshelf});
 background-size: cover;
 width: 100%;
 height: 100%;
@@ -16,7 +16,7 @@ flex-direction: column;
 background-position: center;
 padding: 20px;
 width: 100vw;
-height: 100vh;
+
 overflow-y: scroll;
 & h1 {
   color: #fff;
