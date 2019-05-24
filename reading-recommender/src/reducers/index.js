@@ -10,7 +10,8 @@ import {
     SIGNUP_START,
     SIGNUP_SUCCESS,
     SIGNUP_FAIL,
-    NEW_QUIZ
+    NEW_QUIZ,
+    LOGOUT
    
 
 } from '../actions';
@@ -103,6 +104,11 @@ const initialState = {
             ...state,
             book: false,
             newUser: false
+            }
+            case LOGOUT:
+            return {
+            ...initialState,
+            
             }
             
             
