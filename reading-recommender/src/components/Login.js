@@ -6,7 +6,7 @@ import styled, {css, createGlobalStyle} from 'styled-components'
 
 
 const LoginContainer = styled.div`
-  background-image: url(${bookshelf});
+  //background-image: url(${bookshelf});
   background-size: cover;
   width: 100%;
   height: 100%;
@@ -15,11 +15,17 @@ const LoginContainer = styled.div`
   flex-direction: column;
   background-position: center;
   padding: 20px;
+  margin: 0 auto;
   & h1 {
     color: #fff;
     text-shadow: 2px 2px 2px #000;  
     font-family: 'Bitter', serif;
     } 
+
+@media (max-width: 400px) {
+    width: fit-content;
+  
+}
 `
 const Button = styled.button`
 @keyframes pulse {
@@ -199,7 +205,7 @@ class Login extends React.Component {
 
     render(){
         return (
-            <LoginContainer> 
+            <LoginContainer className="form"> 
               
                 <h1>{this.state.loginForm ? 'Login' : 'Sign Up'}</h1>
                 {this.state.loginForm && 
