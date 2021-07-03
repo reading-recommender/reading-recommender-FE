@@ -1,5 +1,29 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+##What is this Project?
+
+A Reading Recommender App that uses an algorithm to return a book suggestion based on user's answers to six questions
+
+###What was my role?
+
+I was part of the Front End Development Team
+
+### What languages/frameworks did I use?
+
+I utilized React, styled-components, axios and authenticating user tokens.
+
+### Project Site
+https://reading-recommender.netlify.com/
+
+###Instructions on cloning repo
+- Fork this repository from your own GitHub account
+- Click the Copy Link
+- Open your terminal and type 'git clone ' followed by pasting in the copied repo
+- cd into that repo 
+- type 'yarn'  to install all the dependencies
+- type 'yarn start' to run the project
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -66,3 +90,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
